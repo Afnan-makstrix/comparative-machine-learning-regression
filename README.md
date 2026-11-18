@@ -1,5 +1,7 @@
 # Comparative Implementation of Machine Learning Regression Algorithms
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Afnan-makstrix/comparative-machine-learning-regression/blob/main/comparative_ml_regression_colab.ipynb)
+
 ## Academic Assignment: Handwritten + Programming Evaluation
 
 **Course:** Machine Learning / Artificial Intelligence  
@@ -15,6 +17,11 @@
 This repository contains an end-to-end comparative machine learning regression benchmark evaluating six classical and modern supervised regression algorithms on the standard **California Housing Dataset**. 
 
 The goal of this study is to empirically evaluate how differing structural assumptions, inductive biases, and optimization techniques influence predictive precision, generalization capability, computational latency, and interpretability.
+
+### Notebook Options:
+- **[comparative_ml_regression_colab.ipynb](comparative_ml_regression_colab.ipynb):** Clean, runnable Google Colab notebook with **zero comments in code cells** and **14 analytical and diagnostic graphs**.
+- **[comparative_ml_regression.ipynb](comparative_ml_regression.ipynb):** Standard academic notebook with inline explanations and complete markdown sections.
+- **[experiment.py](experiment.py):** Standalone Python script for headless reproduction.
 
 ### Implemented Algorithms:
 1. **Linear Regression (Ordinary Least Squares)**
@@ -48,7 +55,7 @@ The California Housing dataset is loaded via `sklearn.datasets.fetch_california_
 ## 3. Methodological Design and Data Preprocessing
 
 ### 3.1 Train-Test Partitioning
-- The complete dataset of 20,640 records is split into:
+- Complete dataset (20,640 records) is partitioned into:
   - **Training Subset:** 80% (16,512 samples)
   - **Testing Subset:** 20% (4,128 samples)
 - Deterministic random seed `random_state=42` is enforced throughout to ensure 100% reproducible splits across all models.
@@ -115,29 +122,65 @@ The table below is sorted by ascending **RMSE** (lowest error to highest error):
 
 ---
 
-## 6. Visualizations
+## 6. Comprehensive Visualizations (14 Diagnostic Graphs)
 
-The experiment produced four primary visualization figures stored in the `figures/` directory:
+All visualization figures are stored in the `figures/` directory:
 
-### 6.1 Actual vs. Predicted Scatter Plots (2x3 Layout)
+### 6.1 Geographical Map & Spatial Distribution
+Mapping census blocks across California with bubble colors indicating median house values and bubble sizes reflecting block population:
+![Geographical Distribution](figures/california_geo_distribution.png)
+
+### 6.2 Feature & Target Distributions
+Histograms with Kernel Density Estimation (KDE) overlays for all predictors and the target variable:
+![Distributions](figures/feature_target_distributions.png)
+
+### 6.3 Pearson Correlation Matrix Heatmap
+Pairwise linear correlation across all features:
+![Correlation Heatmap](figures/correlation_heatmap.png)
+
+### 6.4 Key Predictors vs. Target Value Relationships
+Bivariate scatter plots with linear trendlines for the top four predictors (`MedInc`, `HouseAge`, `AveRooms`, `AveOccup`):
+![Bivariate Relationships](figures/bivariate_feature_target.png)
+
+### 6.5 Actual vs. Predicted Scatter Plots (2x3 Layout)
 Scatter plots displaying ground-truth housing values versus predictions for all six algorithms, overlaid with a dashed red diagonal line ($y = x$) representing perfect theoretical estimation:
 ![Actual vs Predicted Subplots](figures/actual_vs_predicted_subplots.png)
 
-### 6.2 RMSE Comparison Across Models
+### 6.6 Residuals vs. Predicted Values (Homoscedasticity Diagnostic)
+Plotting residuals ($y - \hat{y}$) against predicted values $\hat{y}$ to detect heteroscedasticity or systematic non-linear error patterns across models:
+![Residuals vs Predicted](figures/residuals_vs_predicted.png)
+
+### 6.7 Residual Error Distribution Histograms
+Assessing the zero-mean normality of prediction residuals across all six algorithms:
+![Residual Distributions](figures/residual_distributions.png)
+
+### 6.8 RMSE Comparison Across Models
 Bar chart displaying the Root Mean Squared Error across all six models (lower is better):
 ![RMSE Comparison Bar Chart](figures/rmse_comparison_barchart.png)
 
-### 6.3 R² Score Comparison Across Models
+### 6.9 MAE Comparison Across Models
+Bar chart displaying the Mean Absolute Error across all six models (lower is better):
+![MAE Comparison Bar Chart](figures/mae_comparison_barchart.png)
+
+### 6.10 R² Score Comparison Across Models
 Bar chart displaying the Coefficient of Determination across all six models (higher is better):
 ![R2 Comparison Bar Chart](figures/r2_comparison_barchart.png)
 
-### 6.4 Comprehensive Multi-Metric Comparison
-Grouped multi-metric comparison comparing MAE, MSE, RMSE, and R² Score side by side:
+### 6.11 Multi-Metric Grouped Comparison
+Direct side-by-side view comparing MAE, MSE, RMSE, and R² Score:
 ![Overall Model Comparison](figures/overall_model_comparison.png)
 
-### 6.5 Exploratory Data Analysis Plots
-- **Feature and Target Distributions:** [feature_target_distributions.png](figures/feature_target_distributions.png)
-- **Correlation Matrix Heatmap:** [correlation_heatmap.png](figures/correlation_heatmap.png)
+### 6.12 Computational Training & Inference Efficiency Comparison
+Horizontal bar charts contrasting model fitting duration and test query latency:
+![Computational Latency Comparison](figures/computational_latency_comparison.png)
+
+### 6.13 Feature Importance Across Model Paradigms
+Comparing feature importance weights across XGBoost, Random Forest, and Linear Regression:
+![Feature Importance Comparison](figures/feature_importance_comparison.png)
+
+### 6.14 Empirical Cumulative Error Distribution (CDF)
+Illustrating the proportion of test predictions falling within any given absolute error threshold:
+![Cumulative Error CDF](figures/cumulative_error_cdf.png)
 
 ---
 
@@ -196,10 +239,11 @@ For BS Artificial Intelligence students presenting this assignment during viva e
 
 ## 10. How to Run
 
-### Option A: Google Colab
-1. Open [Google Colab](https://colab.research.google.com).
-2. Click **Upload** and select `comparative_ml_regression.ipynb`.
-3. Select **Runtime -> Run all**.
+### Option A: Google Colab (One-Click)
+Open the runnable, comment-free notebook directly:  
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Afnan-makstrix/comparative-machine-learning-regression/blob/main/comparative_ml_regression_colab.ipynb)
+
+Select **Runtime -> Run all** to execute the pipeline from start to finish.
 
 ### Option B: Local Python Execution
 1. Clone this repository:
